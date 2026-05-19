@@ -84,7 +84,7 @@ export default function Home() {
               We seek to accomplish our mission through four simple and strategic emphases.
             </p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px' }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
               {
                 num: '01', title: 'Fellowship',
@@ -145,7 +145,7 @@ export default function Home() {
               A private space for DBA pastors and staff — share playbooks, find expertise, and call for help when the nets get heavy.
             </p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px', marginBottom: '48px' }}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5" style={{ marginBottom: '48px' }}>
             {[
               {
                 title: 'Playbook Library',
@@ -193,7 +193,7 @@ export default function Home() {
               Founded in 1967, the Delaware Baptist Association has been rooting and connecting Baptist churches across our region for over half a century.
             </p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', alignItems: 'start' }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8" style={{ alignItems: 'start' }}>
             <div>
               <div style={{ position: 'relative', width: '100%', height: '320px', borderRadius: '4px', overflow: 'hidden', marginBottom: '16px' }}>
                 <Image
