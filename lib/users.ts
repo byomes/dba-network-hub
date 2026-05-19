@@ -1,8 +1,10 @@
 import { promises as fs } from 'fs'
+import fsSync from 'fs'
 import path from 'path'
 import crypto from 'crypto'
 
-const DB_PATH = path.join(process.cwd(), 'data', 'users.json')
+const dataDir = path.join(process.cwd(), 'data')
+const usersFile = path.join(dataDir, 'users.json')
 
 export interface User {
   id: string
@@ -19,40 +21,44 @@ export interface User {
 
 export type SafeUser = Omit<User, 'passwordHash'>
 
-async function ensureDb(): Promise<void> {
-  try {
-    await fs.access(DB_PATH)
-  } catch {
-    await fs.mkdir(path.dirname(DB_PATH), { recursive: true })
-    await fs.writeFile(DB_PATH, '[]', 'utf-8')
-  }
-}
+const seedUsers: User[] = [{
+  id: '1',
+  email: 'pastorbill@catalyst302.com',
+  passwordHash: '$2b$10$vUXn2vJuKqC0IxCzahEBF.HsU8LSPKEbzFz5eE2lMxNlFLQm2T3.y',
+  name: 'Pastor Bill Yomes',
+  church: 'Catalyst Community Church',
+  role: 'pastor',
+  expertise: ['Apologetics', 'Theological Education', 'Digital Ministry'],
+  status: 'active',
+  isAdmin: true,
+  createdAt: '2024-01-01T00:00:00.000Z',
+}]
 
-export async function getUsers(): Promise<User[]> {
-  await ensureDb()
-  const raw = await fs.readFile(DB_PATH, 'utf-8')
-  return JSON.parse(raw)
+export function getUsers(): User[] {
+  if (!fsSync.existsSync(dataDir)) fsSync.mkdirSync(dataDir, { recursive: true })
+  if (!fsSync.existsSync(usersFile)) fsSync.writeFileSync(usersFile, JSON.stringify(seedUsers, null, 2))
+  return JSON.parse(fsSync.readFileSync(usersFile, 'utf-8'))
 }
 
 export async function saveUsers(users: User[]): Promise<void> {
-  await fs.mkdir(path.dirname(DB_PATH), { recursive: true })
-  await fs.writeFile(DB_PATH, JSON.stringify(users, null, 2), 'utf-8')
+  await fs.mkdir(dataDir, { recursive: true })
+  await fs.writeFile(usersFile, JSON.stringify(users, null, 2), 'utf-8')
 }
 
 export async function getUserByEmail(email: string): Promise<User | null> {
-  const users = await getUsers()
+  const users = getUsers()
   return users.find(u => u.email.toLowerCase() === email.toLowerCase()) ?? null
 }
 
 export async function getUserById(id: string): Promise<User | null> {
-  const users = await getUsers()
+  const users = getUsers()
   return users.find(u => u.id === id) ?? null
 }
 
 export async function createUser(
   userData: Omit<User, 'id' | 'status' | 'createdAt'>
 ): Promise<User> {
-  const users = await getUsers()
+  const users = getUsers()
   const newUser: User = {
     ...userData,
     id: crypto.randomUUID(),
@@ -65,7 +71,7 @@ export async function createUser(
 }
 
 export async function updateUserStatus(id: string, status: User['status']): Promise<void> {
-  const users = await getUsers()
+  const users = getUsers()
   const idx = users.findIndex(u => u.id === id)
   if (idx === -1) throw new Error('User not found')
   users[idx].status = status
@@ -73,7 +79,7 @@ export async function updateUserStatus(id: string, status: User['status']): Prom
 }
 
 export async function updateUserAdmin(id: string, isAdmin: boolean): Promise<void> {
-  const users = await getUsers()
+  const users = getUsers()
   const idx = users.findIndex(u => u.id === id)
   if (idx === -1) throw new Error('User not found')
   users[idx].isAdmin = isAdmin
