@@ -8,7 +8,7 @@ const EXPERTISE_OPTIONS = [
   'Children\'s Ministry', 'Discipleship', 'Elder Training', 'Family Discipleship',
   'Leadership Development', 'Marriage & Family', 'Outreach', 'Pastoral Care',
   'Small Groups', 'Stewardship', 'Theological Education', 'Volunteer Training',
-  'Worship & Music', 'Digital Ministry',
+  'Worship & Music', 'Youth Ministry', 'Digital Ministry',
 ]
 
 const inputStyle = {
