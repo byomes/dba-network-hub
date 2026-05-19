@@ -1,49 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 
 export default function Home() {
   return (
     <main style={{ minHeight: '100vh', backgroundColor: '#EAE0D5', color: '#0A0908' }}>
 
-      {/* Header */}
-      <header style={{ borderBottom: '1px solid #5E503F', backgroundColor: '#22333B', padding: '14px 24px' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-            <div style={{ position: 'relative', width: '120px', height: '42px', flexShrink: 0 }}>
-              <Image
-                src="/images/logo.png"
-                alt="Delaware Baptist Association logo"
-                fill
-                style={{ objectFit: 'contain', objectPosition: 'left center' }}
-                priority
-              />
-            </div>
-            <div style={{ borderLeft: '1px solid #5E503F', paddingLeft: '14px' }}>
-              <div style={{ color: '#EAE0D5', fontFamily: 'Georgia, serif', fontSize: '14px', fontWeight: '600', lineHeight: 1.2 }}>Delaware Baptist Association</div>
-              <div style={{ color: '#C6AC8F', fontFamily: 'sans-serif', fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Est. 1967</div>
-            </div>
-          </div>
-          <nav style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
-            {[
-              { label: 'Leadership', href: 'https://www.delawarebaptist.com/leadership' },
-              { label: 'Churches', href: 'https://www.delawarebaptist.com/churches' },
-              { label: 'Events', href: 'https://www.delawarebaptist.com/events' },
-              { label: 'Contact', href: 'https://www.delawarebaptist.com/contact' },
-            ].map(link => (
-              <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer"
-                style={{ color: '#C6AC8F', fontFamily: 'sans-serif', fontSize: '13px', textDecoration: 'none' }}>
-                {link.label}
-              </a>
-            ))}
-            <Link href="/login" style={{
-              backgroundColor: '#C6AC8F', color: '#22333B', fontFamily: 'sans-serif',
-              fontWeight: '700', fontSize: '13px', padding: '8px 18px', borderRadius: '4px', textDecoration: 'none'
-            }}>
-              Pastor Login
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero */}
       <section style={{ position: 'relative', minHeight: '560px', display: 'flex', alignItems: 'center' }}>
@@ -220,12 +184,12 @@ export default function Home() {
               <div style={{ position: 'relative', width: '100%', height: '320px', borderRadius: '4px', overflow: 'hidden', marginBottom: '16px' }}>
                 <Image
                   src="/images/leadership-team.jpg"
-                  alt="DBA leadership team"
+                  alt="Christian Challenge Leadership Team — University of Delaware"
                   fill
                   style={{ objectFit: 'cover' }}
                 />
               </div>
-              <h3 style={{ fontFamily: 'Georgia, serif', fontSize: '18px', color: '#22333B', marginBottom: '8px' }}>Leadership Team</h3>
+              <h3 style={{ fontFamily: 'Georgia, serif', fontSize: '18px', color: '#22333B', marginBottom: '8px' }}>Christian Challenge Leadership Team — University of Delaware</h3>
               <p style={{ fontFamily: 'sans-serif', fontSize: '13px', color: '#5E503F', lineHeight: 1.7 }}>
                 Our leadership team serves the churches and pastors of Delaware — coordinating resources, facilitating partnerships, and championing the mission of each congregation.
               </p>
@@ -234,19 +198,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer style={{ backgroundColor: '#0A0908', padding: '40px 24px', borderTop: '1px solid #22333B' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
-          <div>
-            <div style={{ fontFamily: 'Georgia, serif', fontSize: '14px', color: '#EAE0D5', marginBottom: '6px' }}>Delaware Baptist Association</div>
-            <div style={{ fontFamily: 'sans-serif', fontSize: '12px', color: '#5E503F' }}>316 Red Mill Road, Newark, DE 19713</div>
-          </div>
-          <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
-            <a href="tel:302-741-2488" style={{ fontFamily: 'sans-serif', fontSize: '12px', color: '#5E503F', textDecoration: 'none' }}>302-741-2488</a>
-            <a href="mailto:info@delawarebaptist.com" style={{ fontFamily: 'sans-serif', fontSize: '12px', color: '#5E503F', textDecoration: 'none' }}>info@delawarebaptist.com</a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
     </main>
   )
