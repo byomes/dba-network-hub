@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import bcrypt from 'bcryptjs'
 import { getUserByEmail, createUser } from '@/lib/users'
 import { sendAdminNotification, sendSignupConfirmation } from '@/lib/email'
 
@@ -24,22 +23,23 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'An account with this email already exists' }, { status: 409 })
     }
 
-    const passwordHash = await bcrypt.hash(password, 12)
     const expertiseArray = typeof expertise === 'string'
       ? expertise.split(',').map((e: string) => e.trim()).filter(Boolean)
       : Array.isArray(expertise) ? expertise : []
 
     const newUser = await createUser({
       email,
-      passwordHash,
+      password,
       name,
       church,
-      role: role as 'pastor' | 'staff',
+      role,
       expertise: expertiseArray,
-      isAdmin: false,
     })
 
-    // Fire both emails; don't fail the request if email is misconfigured
+    if (!newUser) {
+      return NextResponse.json({ error: 'Failed to create account' }, { status: 500 })
+    }
+
     await Promise.allSettled([
       sendAdminNotification({
         id: newUser.id,

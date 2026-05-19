@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
   }
   const users = await getUsers()
   return NextResponse.json({
-    users: users.map(({ passwordHash: _ph, ...u }) => u),
+    users: users.map(({ password_hash: _ph, ...u }) => u),
   })
 }
 

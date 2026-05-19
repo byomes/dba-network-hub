@@ -8,16 +8,9 @@ export async function verifyCredentials(email: string, password: string) {
   const user = await getUserByEmail(email)
   if (!user) return null
   if (user.status !== 'active') return null
-  const valid = await bcrypt.compare(password, user.passwordHash)
+  const valid = await bcrypt.compare(password, user.password_hash)
   if (!valid) return null
-  return {
-    id: user.id,
-    email: user.email,
-    name: user.name,
-    church: user.church,
-    expertise: user.expertise,
-    isAdmin: user.isAdmin,
-  }
+  return { id: user.id, email: user.email, name: user.name, church: user.church, isAdmin: user.is_admin }
 }
 
 export function signToken(payload: object) {
