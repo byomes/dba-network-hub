@@ -104,7 +104,7 @@ export default function Home() {
               {
                 num: '04', title: 'Membership',
                 desc: 'Supporting and strengthening each other as a family of local churches.',
-                img: null, imgAlt: null
+                img: '/images/membership.png', imgAlt: 'Church membership'
               },
             ].map(item => (
               <div key={item.num} style={{
@@ -120,11 +120,7 @@ export default function Home() {
                     />
                   </div>
                 )}
-                {!item.img && (
-                  <div style={{ width: '100%', height: '140px', backgroundColor: '#22333B', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <span style={{ color: '#C6AC8F', fontFamily: 'Georgia, serif', fontSize: '40px', fontWeight: '400', opacity: 0.4 }}>DBA</span>
-                  </div>
-                )}
+
                 <div style={{ padding: '24px 20px' }}>
                   <div style={{ fontFamily: 'Georgia, serif', fontSize: '24px', color: '#C6AC8F', marginBottom: '10px' }}>{item.num}.</div>
                   <h3 style={{ fontFamily: 'Georgia, serif', fontSize: '17px', color: '#22333B', marginBottom: '8px' }}>{item.title}</h3>
