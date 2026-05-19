@@ -65,39 +65,31 @@ export default function Home() {
               {
                 num: '01', title: 'Fellowship',
                 desc: 'Connecting pastors and churches in meaningful relationships that last beyond Sunday.',
-                img: '/images/fellowship.jpg', imgAlt: 'Pastors in fellowship'
+                icon: 'ti-users',
               },
               {
                 num: '02', title: 'Partnership',
                 desc: 'Encouraging churches to partner together for Kingdom work across Delaware.',
-                img: '/images/partnership.jpg', imgAlt: 'Churches in partnership'
+                icon: 'ti-network',
               },
               {
                 num: '03', title: 'Scholarship',
                 desc: 'Equipping and resourcing churches through grants, support, and shared playbooks.',
-                img: '/images/scholarship.jpg', imgAlt: 'Scholarship and resourcing'
+                icon: 'ti-coin',
               },
               {
                 num: '04', title: 'Membership',
                 desc: 'Supporting and strengthening each other as a family of local churches.',
-                img: '/images/membership.png', imgAlt: 'Church membership'
+                icon: 'ti-building-church',
               },
             ].map(item => (
               <div key={item.num} style={{
                 backgroundColor: '#fff', border: '1px solid #C6AC8F', borderRadius: '4px', overflow: 'hidden'
               }}>
-                {item.img && (
-                  <div style={{ position: 'relative', width: '100%', height: '140px' }}>
-                    <Image
-                      src={item.img}
-                      alt={item.imgAlt!}
-                      fill
-                      style={{ objectFit: 'cover' }}
-                    />
-                  </div>
-                )}
-
-                <div style={{ padding: '24px 20px' }}>
+                <div style={{ padding: '28px 20px 0' }}>
+                  <i className={`ti ${item.icon}`} style={{ fontSize: '32px', color: '#C6AC8F' }} />
+                </div>
+                <div style={{ padding: '16px 20px 24px' }}>
                   <div style={{ fontFamily: 'Georgia, serif', fontSize: '24px', color: '#C6AC8F', marginBottom: '10px' }}>{item.num}.</div>
                   <h3 style={{ fontFamily: 'Georgia, serif', fontSize: '17px', color: '#22333B', marginBottom: '8px' }}>{item.title}</h3>
                   <p style={{ fontFamily: 'sans-serif', fontSize: '13px', color: '#5E503F', lineHeight: 1.7 }}>{item.desc}</p>
