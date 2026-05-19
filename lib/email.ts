@@ -1,9 +1,7 @@
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'pastorbill@catalyst302.com'
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://dba-network-hub.vercel.app'
-// Update FROM address once your domain is verified in Resend
 const FROM = process.env.RESEND_FROM || 'DBA Network Hub <onboarding@resend.dev>'
 
 export async function sendAdminNotification(user: {
@@ -13,6 +11,7 @@ export async function sendAdminNotification(user: {
   role: string
   email: string
 }) {
+  const resend = new Resend(process.env.RESEND_API_KEY)
   await resend.emails.send({
     from: FROM,
     to: ADMIN_EMAIL,
@@ -35,6 +34,7 @@ export async function sendAdminNotification(user: {
 }
 
 export async function sendSignupConfirmation(user: { name: string; email: string }) {
+  const resend = new Resend(process.env.RESEND_API_KEY)
   await resend.emails.send({
     from: FROM,
     to: user.email,
@@ -49,6 +49,7 @@ export async function sendSignupConfirmation(user: { name: string; email: string
 }
 
 export async function sendApprovalEmail(user: { name: string; email: string }) {
+  const resend = new Resend(process.env.RESEND_API_KEY)
   await resend.emails.send({
     from: FROM,
     to: user.email,
