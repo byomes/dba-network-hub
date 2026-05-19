@@ -100,7 +100,8 @@ export default function LoginPage() {
           </div>
 
           <p style={{ textAlign: 'center', fontFamily: 'sans-serif', fontSize: '12px', color: '#5E503F', marginTop: '24px' }}>
-            Not a DBA member? Contact your association administrator.
+            Not yet in the network?{' '}
+            <Link href="/signup" style={{ color: '#C6AC8F', textDecoration: 'none' }}>Request access to the network →</Link>
           </p>
         </div>
       </div>

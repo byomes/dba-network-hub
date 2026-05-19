@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 const PASTORS = [
   { id: 1, name: 'Pastor Bill Yomes', church: 'Catalyst Community Church', expertise: ['Apologetics', 'Theological Education', 'Digital Ministry'], initials: 'BY' },
@@ -34,6 +35,13 @@ export default function Dashboard() {
   const [selectedPastor, setSelectedPastor] = useState<typeof PASTORS[0] | null>(null)
   const [message, setMessage] = useState('')
   const [messageSent, setMessageSent] = useState(false)
+  const [currentUser, setCurrentUser] = useState<{ name: string; church: string; isAdmin: boolean } | null>(null)
+
+  useEffect(() => {
+    fetch('/api/auth').then(r => r.json()).then(d => {
+      if (d.user) setCurrentUser({ name: d.user.name, church: d.user.church, isAdmin: d.user.isAdmin })
+    }).catch(() => {})
+  }, [])
 
   async function handleLogout() {
     await fetch('/api/auth', { method: 'DELETE' })
@@ -73,7 +81,12 @@ export default function Dashboard() {
             <div style={{ backgroundColor: C.brown, color: C.tan, fontFamily: 'sans-serif', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', padding: '2px 8px', borderRadius: '2px' }}>Private</div>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-            <span style={{ color: C.tan, fontFamily: 'sans-serif', fontSize: '13px' }}>Pastor Bill Yomes · Catalyst Community</span>
+            {currentUser?.isAdmin && (
+              <Link href="/admin" style={{ color: C.tan, fontFamily: 'sans-serif', fontSize: '13px', textDecoration: 'none' }}>Admin</Link>
+            )}
+            <span style={{ color: C.tan, fontFamily: 'sans-serif', fontSize: '13px' }}>
+              {currentUser ? `${currentUser.name} · ${currentUser.church}` : 'Loading...'}
+            </span>
             <button onClick={handleLogout} style={{ color: C.brown, fontFamily: 'sans-serif', fontSize: '13px', background: 'none', border: 'none', cursor: 'pointer' }}>
               Sign Out
             </button>
