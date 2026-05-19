@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Failed to create account' }, { status: 500 })
     }
 
-    await Promise.allSettled([
+    const [adminEmailResult, confirmEmailResult] = await Promise.allSettled([
       sendAdminNotification({
         id: newUser.id,
         name: newUser.name,
@@ -50,6 +50,8 @@ export async function POST(req: NextRequest) {
       }),
       sendSignupConfirmation({ name: newUser.name, email: newUser.email }),
     ])
+    console.log('Resend admin notification result:', JSON.stringify(adminEmailResult))
+    console.log('Resend signup confirmation result:', JSON.stringify(confirmEmailResult))
 
     return NextResponse.json({ success: true })
   } catch (error) {

@@ -62,6 +62,11 @@ export default function AdminPage() {
     setActionLoading(null)
   }
 
+  async function handleDelete(userId: string, userName: string) {
+    if (!confirm(`Delete ${userName}? This cannot be undone.`)) return
+    await doAction('delete', userId)
+  }
+
   const pending = users.filter(u => u.status === 'pending')
   const active = users.filter(u => u.status === 'active')
   const rejected = users.filter(u => u.status === 'rejected')
@@ -160,6 +165,13 @@ export default function AdminPage() {
                     >
                       {actionLoading === u.id + 'reject' ? '...' : 'Reject'}
                     </button>
+                    <button
+                      onClick={() => handleDelete(u.id, u.name)}
+                      disabled={actionLoading === u.id + 'delete'}
+                      style={{ ...btnBase, backgroundColor: '#c0392b', color: '#fff' }}
+                    >
+                      {actionLoading === u.id + 'delete' ? '...' : 'Delete'}
+                    </button>
                   </>
                 } />
               ))}
@@ -177,13 +189,22 @@ export default function AdminPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {active.map(u => (
                 <UserRow key={u.id} u={u} actions={
-                  <button
-                    onClick={() => doAction('toggleAdmin', u.id, { isAdmin: !u.isAdmin })}
-                    disabled={actionLoading === u.id + 'toggleAdmin'}
-                    style={{ ...btnBase, backgroundColor: u.isAdmin ? C.brown : 'transparent', color: u.isAdmin ? C.linen : C.brown, border: `1px solid ${C.brown}` }}
-                  >
-                    {actionLoading === u.id + 'toggleAdmin' ? '...' : (u.isAdmin ? 'Revoke Admin' : 'Grant Admin')}
-                  </button>
+                  <>
+                    <button
+                      onClick={() => doAction('toggleAdmin', u.id, { isAdmin: !u.isAdmin })}
+                      disabled={actionLoading === u.id + 'toggleAdmin'}
+                      style={{ ...btnBase, backgroundColor: u.isAdmin ? C.brown : 'transparent', color: u.isAdmin ? C.linen : C.brown, border: `1px solid ${C.brown}` }}
+                    >
+                      {actionLoading === u.id + 'toggleAdmin' ? '...' : (u.isAdmin ? 'Revoke Admin' : 'Grant Admin')}
+                    </button>
+                    <button
+                      onClick={() => handleDelete(u.id, u.name)}
+                      disabled={actionLoading === u.id + 'delete'}
+                      style={{ ...btnBase, backgroundColor: '#c0392b', color: '#fff' }}
+                    >
+                      {actionLoading === u.id + 'delete' ? '...' : 'Delete'}
+                    </button>
+                  </>
                 } />
               ))}
             </div>
@@ -200,13 +221,22 @@ export default function AdminPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {rejected.map(u => (
                 <UserRow key={u.id} u={u} actions={
-                  <button
-                    onClick={() => doAction('approve', u.id)}
-                    disabled={actionLoading === u.id + 'approve'}
-                    style={{ ...btnBase, backgroundColor: 'transparent', color: C.tan, border: `1px solid ${C.tan}` }}
-                  >
-                    {actionLoading === u.id + 'approve' ? '...' : 'Reinstate'}
-                  </button>
+                  <>
+                    <button
+                      onClick={() => doAction('approve', u.id)}
+                      disabled={actionLoading === u.id + 'approve'}
+                      style={{ ...btnBase, backgroundColor: 'transparent', color: C.tan, border: `1px solid ${C.tan}` }}
+                    >
+                      {actionLoading === u.id + 'approve' ? '...' : 'Reinstate'}
+                    </button>
+                    <button
+                      onClick={() => handleDelete(u.id, u.name)}
+                      disabled={actionLoading === u.id + 'delete'}
+                      style={{ ...btnBase, backgroundColor: '#c0392b', color: '#fff' }}
+                    >
+                      {actionLoading === u.id + 'delete' ? '...' : 'Delete'}
+                    </button>
+                  </>
                 } />
               ))}
             </div>

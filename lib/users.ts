@@ -60,3 +60,7 @@ export async function updateUserAdmin(id: string, isAdmin: boolean): Promise<Use
   const { data } = await supabase.from('users').update({ is_admin: isAdmin }).eq('id', id).select().single()
   return data
 }
+
+export async function deleteUser(id: string): Promise<void> {
+  await supabase.from('users').delete().eq('id', id)
+}

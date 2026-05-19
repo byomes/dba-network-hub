@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { verifyToken } from '@/lib/auth'
-import { getUsers, getUserById, updateUserStatus, updateUserAdmin } from '@/lib/users'
+import { getUsers, getUserById, updateUserStatus, updateUserAdmin, deleteUser } from '@/lib/users'
 import { sendApprovalEmail } from '@/lib/email'
 
 function getAdminPayload(req: NextRequest) {
@@ -50,6 +50,11 @@ export async function POST(req: NextRequest) {
 
     if (action === 'toggleAdmin') {
       await updateUserAdmin(userId, Boolean(isAdmin))
+      return NextResponse.json({ success: true })
+    }
+
+    if (action === 'delete') {
+      await deleteUser(userId)
       return NextResponse.json({ success: true })
     }
 
