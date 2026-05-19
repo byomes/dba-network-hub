@@ -46,32 +46,44 @@ export default function Home() {
       </header>
 
       {/* Hero */}
-      <section style={{ backgroundColor: '#22333B', padding: '80px 24px 72px' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', textAlign: 'center' }}>
-          <div style={{
-            display: 'inline-block', border: '1px solid #5E503F', color: '#C6AC8F',
-            fontFamily: 'sans-serif', fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase',
-            padding: '6px 16px', borderRadius: '2px', marginBottom: '28px'
-          }}>
-            20+ Churches · Delaware Region · Network Hub
+      <section style={{ position: 'relative', minHeight: '560px', display: 'flex', alignItems: 'center' }}>
+        <Image
+          src="/images/wilmington.jpg"
+          alt="Wilmington, Delaware"
+          fill
+          style={{ objectFit: 'cover', objectPosition: 'center' }}
+          priority
+        />
+        {/* Overlay */}
+        <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(34, 51, 59, 0.75)' }} />
+        {/* Content */}
+        <div style={{ position: 'relative', zIndex: 1, width: '100%', padding: '80px 24px 72px' }}>
+          <div style={{ maxWidth: '1100px', margin: '0 auto', textAlign: 'center' }}>
+            <div style={{
+              display: 'inline-block', border: '1px solid #C6AC8F', color: '#C6AC8F',
+              fontFamily: 'sans-serif', fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase',
+              padding: '6px 16px', borderRadius: '2px', marginBottom: '28px'
+            }}>
+              20+ Churches · Delaware Region · Network Hub
+            </div>
+            <h1 style={{ color: '#EAE0D5', fontFamily: 'Georgia, serif', fontSize: '52px', fontWeight: '400', lineHeight: 1.25, marginBottom: '20px' }}>
+              Strengthening disciple-making<br />
+              <span style={{ color: '#C6AC8F' }}>across our region.</span>
+            </h1>
+            <p style={{ color: '#C6AC8F', fontFamily: 'sans-serif', fontSize: '16px', maxWidth: '560px', margin: '0 auto 16px', lineHeight: 1.7 }}>
+              The Delaware Baptist Association exists to strengthen the disciple-making efforts of churches and pastors in our region.
+            </p>
+            <p style={{ color: '#EAE0D5', fontFamily: 'Georgia, serif', fontSize: '14px', fontStyle: 'italic', marginBottom: '40px', opacity: 0.7 }}>
+              &ldquo;In essentials unity, in non-essentials liberty, in all things charity.&rdquo;
+            </p>
+            <Link href="/login" style={{
+              display: 'inline-block', backgroundColor: '#C6AC8F', color: '#22333B',
+              fontFamily: 'sans-serif', fontWeight: '700', fontSize: '14px',
+              padding: '14px 32px', borderRadius: '4px', textDecoration: 'none', letterSpacing: '0.04em'
+            }}>
+              Access the Pastor Network →
+            </Link>
           </div>
-          <h1 style={{ color: '#EAE0D5', fontFamily: 'Georgia, serif', fontSize: '52px', fontWeight: '400', lineHeight: 1.25, marginBottom: '20px' }}>
-            Strengthening disciple-making<br />
-            <span style={{ color: '#C6AC8F' }}>across our region.</span>
-          </h1>
-          <p style={{ color: '#C6AC8F', fontFamily: 'sans-serif', fontSize: '16px', maxWidth: '560px', margin: '0 auto 16px', lineHeight: 1.7 }}>
-            The Delaware Baptist Association exists to strengthen the disciple-making efforts of churches and pastors in our region.
-          </p>
-          <p style={{ color: '#5E503F', fontFamily: 'Georgia, serif', fontSize: '14px', fontStyle: 'italic', marginBottom: '40px' }}>
-            &ldquo;In essentials unity, in non-essentials liberty, in all things charity.&rdquo;
-          </p>
-          <Link href="/login" style={{
-            display: 'inline-block', backgroundColor: '#C6AC8F', color: '#22333B',
-            fontFamily: 'sans-serif', fontWeight: '700', fontSize: '14px',
-            padding: '14px 32px', borderRadius: '4px', textDecoration: 'none', letterSpacing: '0.04em'
-          }}>
-            Access the Pastor Network →
-          </Link>
         </div>
       </section>
 
