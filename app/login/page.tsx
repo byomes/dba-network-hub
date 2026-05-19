@@ -15,22 +15,14 @@ export default function LoginPage() {
     e.preventDefault()
     setLoading(true)
     setError('')
-
     try {
       const res = await fetch('/api/auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
       })
-
       const data = await res.json()
-
-      if (!res.ok) {
-        setError(data.error || 'Login failed')
-        setLoading(false)
-        return
-      }
-
+      if (!res.ok) { setError(data.error || 'Login failed'); setLoading(false); return }
       router.push('/dashboard')
     } catch {
       setError('Something went wrong. Please try again.')
@@ -38,69 +30,76 @@ export default function LoginPage() {
     }
   }
 
+  const inputStyle = {
+    width: '100%', backgroundColor: '#EAE0D5', border: '1px solid #C6AC8F',
+    borderRadius: '4px', padding: '12px 16px', color: '#0A0908',
+    fontFamily: 'sans-serif', fontSize: '14px', outline: 'none',
+    boxSizing: 'border-box' as const
+  }
+
   return (
-    <main className="min-h-screen bg-slate-950 flex flex-col">
-      <header className="border-b border-slate-800 px-6 py-4">
-        <div className="max-w-6xl mx-auto flex items-center gap-3">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-amber-500 rounded flex items-center justify-center">
-              <span className="text-slate-950 font-bold text-sm">DBA</span>
+    <main style={{ minHeight: '100vh', backgroundColor: '#22333B', display: 'flex', flexDirection: 'column' }}>
+      <header style={{ borderBottom: '1px solid #5E503F', padding: '16px 24px' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}>
+            <div style={{ width: '36px', height: '36px', backgroundColor: '#C6AC8F', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ color: '#22333B', fontWeight: '700', fontSize: '11px', fontFamily: 'sans-serif' }}>DBA</span>
             </div>
-            <span className="font-semibold text-white tracking-wide">Network Hub</span>
+            <div style={{ color: '#EAE0D5', fontFamily: 'Georgia, serif', fontSize: '15px' }}>Delaware Baptist Association</div>
           </Link>
         </div>
       </header>
 
-      <div className="flex-1 flex items-center justify-center px-6 py-16">
-        <div className="w-full max-w-md">
-          <div className="text-center mb-8">
-            <h1 className="text-2xl font-bold text-white mb-2">Pastor Login</h1>
-            <p className="text-slate-400 text-sm">Access is limited to DBA network pastors and staff.</p>
+      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '48px 24px' }}>
+        <div style={{ width: '100%', maxWidth: '420px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <h1 style={{ fontFamily: 'Georgia, serif', fontSize: '28px', color: '#EAE0D5', fontWeight: '400', marginBottom: '8px' }}>Pastor Login</h1>
+            <p style={{ fontFamily: 'sans-serif', fontSize: '13px', color: '#C6AC8F', lineHeight: 1.6 }}>
+              Access is limited to DBA network pastors and staff.
+            </p>
           </div>
 
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8">
-            <form onSubmit={handleLogin} className="space-y-5">
-              <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">Email Address</label>
+          <div style={{ backgroundColor: '#0A0908', border: '1px solid #5E503F', borderRadius: '4px', padding: '36px' }}>
+            <form onSubmit={handleLogin}>
+              <div style={{ marginBottom: '20px' }}>
+                <label style={{ display: 'block', fontFamily: 'sans-serif', fontSize: '12px', color: '#C6AC8F', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '8px' }}>
+                  Email Address
+                </label>
                 <input
-                  type="email"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  required
-                  placeholder="pastor@yourchurch.com"
-                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-500 transition-colors"
+                  type="email" value={email} onChange={e => setEmail(e.target.value)}
+                  required placeholder="pastor@yourchurch.com" style={inputStyle}
                 />
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">Password</label>
+              <div style={{ marginBottom: '24px' }}>
+                <label style={{ display: 'block', fontFamily: 'sans-serif', fontSize: '12px', color: '#C6AC8F', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '8px' }}>
+                  Password
+                </label>
                 <input
-                  type="password"
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                  required
-                  placeholder="••••••••"
-                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-500 transition-colors"
+                  type="password" value={password} onChange={e => setPassword(e.target.value)}
+                  required placeholder="••••••••" style={inputStyle}
                 />
               </div>
 
               {error && (
-                <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-sm px-4 py-3 rounded-lg">
+                <div style={{ backgroundColor: '#5E503F', border: '1px solid #C6AC8F', color: '#EAE0D5', fontFamily: 'sans-serif', fontSize: '13px', padding: '12px 16px', borderRadius: '4px', marginBottom: '20px' }}>
                   {error}
                 </div>
               )}
 
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-amber-500 hover:bg-amber-400 disabled:opacity-50 text-slate-950 font-bold py-3 rounded-lg transition-colors text-sm"
-              >
+              <button type="submit" disabled={loading} style={{
+                width: '100%', backgroundColor: '#C6AC8F', color: '#22333B',
+                fontFamily: 'sans-serif', fontWeight: '700', fontSize: '14px',
+                padding: '13px', borderRadius: '4px', border: 'none',
+                cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.7 : 1,
+                letterSpacing: '0.04em'
+              }}>
                 {loading ? 'Signing in...' : 'Sign In to Network'}
               </button>
             </form>
           </div>
 
-          <p className="text-center text-slate-600 text-xs mt-6">
+          <p style={{ textAlign: 'center', fontFamily: 'sans-serif', fontSize: '12px', color: '#5E503F', marginTop: '24px' }}>
             Not a DBA member? Contact your association administrator.
           </p>
         </div>

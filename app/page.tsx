@@ -2,111 +2,141 @@ import Link from 'next/link'
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-slate-950 text-white">
+    <main style={{ minHeight: '100vh', backgroundColor: '#EAE0D5', color: '#0A0908' }}>
       {/* Header */}
-      <header className="border-b border-slate-800 px-6 py-4">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-amber-500 rounded flex items-center justify-center">
-              <span className="text-slate-950 font-bold text-sm">DBA</span>
+      <header style={{ borderBottom: '1px solid #C6AC8F', backgroundColor: '#22333B', padding: '16px 24px' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{ width: '38px', height: '38px', backgroundColor: '#C6AC8F', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ color: '#22333B', fontWeight: '700', fontSize: '11px', fontFamily: 'sans-serif', letterSpacing: '0.05em' }}>DBA</span>
             </div>
             <div>
-              <div className="font-semibold text-white text-sm leading-tight">Delaware Baptist Association</div>
-              <div className="text-slate-500 text-xs">Network Hub</div>
+              <div style={{ color: '#EAE0D5', fontFamily: 'Georgia, serif', fontSize: '15px', fontWeight: '600', lineHeight: 1.2 }}>Delaware Baptist Association</div>
+              <div style={{ color: '#C6AC8F', fontFamily: 'sans-serif', fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Est. 1967</div>
             </div>
           </div>
-          <nav className="hidden md:flex items-center gap-6 text-sm text-slate-400">
-            <a href="https://www.delawarebaptist.com/leadership" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Leadership</a>
-            <a href="https://www.delawarebaptist.com/churches" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Churches</a>
-            <a href="https://www.delawarebaptist.com/events" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Events</a>
-            <a href="https://www.delawarebaptist.com/contact" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Contact</a>
+          <nav style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
+            {[
+              { label: 'Leadership', href: 'https://www.delawarebaptist.com/leadership' },
+              { label: 'Churches', href: 'https://www.delawarebaptist.com/churches' },
+              { label: 'Events', href: 'https://www.delawarebaptist.com/events' },
+              { label: 'Contact', href: 'https://www.delawarebaptist.com/contact' },
+            ].map(link => (
+              <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer"
+                style={{ color: '#C6AC8F', fontFamily: 'sans-serif', fontSize: '13px', textDecoration: 'none' }}>
+                {link.label}
+              </a>
+            ))}
+            <Link href="/login" style={{
+              backgroundColor: '#C6AC8F', color: '#22333B', fontFamily: 'sans-serif',
+              fontWeight: '700', fontSize: '13px', padding: '8px 18px', borderRadius: '4px', textDecoration: 'none'
+            }}>
+              Pastor Login
+            </Link>
           </nav>
-          <Link href="/login" className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold px-5 py-2 rounded-lg text-sm transition-colors">
-            Pastor Login
-          </Link>
         </div>
       </header>
 
       {/* Hero */}
-      <section className="max-w-6xl mx-auto px-6 pt-20 pb-16 text-center">
-        <div className="inline-block bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold px-4 py-1.5 rounded-full mb-6 tracking-widest uppercase">
-          Established 1967 · 20+ Churches · Delaware Region
-        </div>
-        <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight mb-4">
-          Strengthening disciple-making<br />
-          <span className="text-amber-400">across our region.</span>
-        </h1>
-        <p className="text-slate-400 text-lg max-w-2xl mx-auto mb-4">
-          The Delaware Baptist Association exists to strengthen the disciple-making efforts of churches and pastors in our region.
-        </p>
-        <p className="text-slate-500 text-sm max-w-xl mx-auto mb-10 italic">
-          "In essentials unity, in non-essentials liberty, in all things charity."
-        </p>
-        <Link href="/login" className="inline-block bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-8 py-4 rounded-xl text-base transition-colors">
-          Access the Pastor Network →
-        </Link>
-      </section>
-
-      {/* Mission Four Emphases */}
-      <section className="max-w-6xl mx-auto px-6 pb-20">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl font-bold text-white mb-2">Our Mission</h2>
-          <p className="text-slate-400 text-sm max-w-xl mx-auto">We seek to accomplish our mission through four simple and strategic emphases.</p>
-        </div>
-        <div className="grid md:grid-cols-4 gap-5">
-          {[
-            { number: '01', title: 'Fellowship', desc: 'Connecting pastors and churches in meaningful relationships' },
-            { number: '02', title: 'Partnership', desc: 'Encouraging churches to partner together for Kingdom work' },
-            { number: '03', title: 'Scholarship', desc: 'Equipping and resourcing churches through grants and support' },
-            { number: '04', title: 'Membership', desc: 'Supporting and strengthening each other as local churches' },
-          ].map(item => (
-            <div key={item.number} className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
-              <div className="text-amber-500 font-bold text-2xl mb-3">{item.number}.</div>
-              <h3 className="text-white font-semibold mb-2">{item.title}</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
-            </div>
-          ))}
+      <section style={{ backgroundColor: '#22333B', padding: '80px 24px 72px' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', textAlign: 'center' }}>
+          <div style={{
+            display: 'inline-block', border: '1px solid #5E503F', color: '#C6AC8F',
+            fontFamily: 'sans-serif', fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase',
+            padding: '6px 16px', borderRadius: '2px', marginBottom: '28px'
+          }}>
+            20+ Churches · Delaware Region · Network Hub
+          </div>
+          <h1 style={{ color: '#EAE0D5', fontFamily: 'Georgia, serif', fontSize: '52px', fontWeight: '400', lineHeight: 1.25, marginBottom: '20px' }}>
+            Strengthening disciple-making<br />
+            <span style={{ color: '#C6AC8F' }}>across our region.</span>
+          </h1>
+          <p style={{ color: '#C6AC8F', fontFamily: 'sans-serif', fontSize: '16px', maxWidth: '560px', margin: '0 auto 16px', lineHeight: 1.7 }}>
+            The Delaware Baptist Association exists to strengthen the disciple-making efforts of churches and pastors in our region.
+          </p>
+          <p style={{ color: '#5E503F', fontFamily: 'Georgia, serif', fontSize: '14px', fontStyle: 'italic', marginBottom: '40px' }}>
+            "In essentials unity, in non-essentials liberty, in all things charity."
+          </p>
+          <Link href="/login" style={{
+            display: 'inline-block', backgroundColor: '#C6AC8F', color: '#22333B',
+            fontFamily: 'sans-serif', fontWeight: '700', fontSize: '14px',
+            padding: '14px 32px', borderRadius: '4px', textDecoration: 'none', letterSpacing: '0.04em'
+          }}>
+            Access the Pastor Network →
+          </Link>
         </div>
       </section>
 
-      {/* Network Hub CTA */}
-      <section className="border-t border-slate-800 bg-slate-900">
-        <div className="max-w-6xl mx-auto px-6 py-16">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl font-bold text-white mb-2">The DBA Network Hub</h2>
-            <p className="text-slate-400 text-sm max-w-xl mx-auto">A private space for DBA pastors and staff — share playbooks, find expertise, and call for help when the nets get heavy.</p>
+      {/* Four Emphases */}
+      <section style={{ padding: '72px 24px', backgroundColor: '#EAE0D5' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+            <h2 style={{ fontFamily: 'Georgia, serif', fontSize: '30px', fontWeight: '400', color: '#22333B', marginBottom: '10px' }}>Our Mission</h2>
+            <p style={{ fontFamily: 'sans-serif', fontSize: '14px', color: '#5E503F', maxWidth: '480px', margin: '0 auto', lineHeight: 1.7 }}>
+              We seek to accomplish our mission through four simple and strategic emphases.
+            </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-slate-950 border border-slate-800 rounded-2xl p-7 hover:border-amber-500/30 transition-colors">
-              <div className="w-11 h-11 bg-amber-500/10 rounded-xl flex items-center justify-center mb-4">
-                <svg className="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px' }}>
+            {[
+              { num: '01', title: 'Fellowship', desc: 'Connecting pastors and churches in meaningful relationships' },
+              { num: '02', title: 'Partnership', desc: 'Encouraging churches to partner together for Kingdom work' },
+              { num: '03', title: 'Scholarship', desc: 'Equipping and resourcing churches through grants and support' },
+              { num: '04', title: 'Membership', desc: 'Supporting and strengthening each other as local churches' },
+            ].map(item => (
+              <div key={item.num} style={{
+                backgroundColor: '#fff', border: '1px solid #C6AC8F', borderRadius: '4px', padding: '28px 24px'
+              }}>
+                <div style={{ fontFamily: 'Georgia, serif', fontSize: '28px', color: '#C6AC8F', marginBottom: '12px' }}>{item.num}.</div>
+                <h3 style={{ fontFamily: 'Georgia, serif', fontSize: '17px', color: '#22333B', marginBottom: '8px' }}>{item.title}</h3>
+                <p style={{ fontFamily: 'sans-serif', fontSize: '13px', color: '#5E503F', lineHeight: 1.7 }}>{item.desc}</p>
               </div>
-              <h3 className="font-semibold text-white mb-2">Playbook Library</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">Access real solutions from real churches in our network — sabbatical plans, counseling frameworks, leadership systems.</p>
-            </div>
-            <div className="bg-slate-950 border border-slate-800 rounded-2xl p-7 hover:border-amber-500/30 transition-colors">
-              <div className="w-11 h-11 bg-amber-500/10 rounded-xl flex items-center justify-center mb-4">
-                <svg className="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-              </div>
-              <h3 className="font-semibold text-white mb-2">Find a Pastor</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">Search our network by expertise. Find who already has the playbook for what you're facing right now.</p>
-            </div>
-            <div className="bg-slate-950 border border-slate-800 rounded-2xl p-7 hover:border-amber-500/30 transition-colors">
-              <div className="w-11 h-11 bg-amber-500/10 rounded-xl flex items-center justify-center mb-4">
-                <svg className="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                </svg>
-              </div>
-              <h3 className="font-semibold text-white mb-2">Direct Connect</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">Message any pastor in the network directly. No group chats. No inbox spam. Signal when you need reinforcements.</p>
-            </div>
+            ))}
           </div>
-          <div className="text-center mt-10">
-            <Link href="/login" className="inline-block bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-8 py-4 rounded-xl text-base transition-colors">
+        </div>
+      </section>
+
+      {/* Network Hub Section */}
+      <section style={{ backgroundColor: '#22333B', padding: '72px 24px' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+            <h2 style={{ fontFamily: 'Georgia, serif', fontSize: '30px', fontWeight: '400', color: '#EAE0D5', marginBottom: '10px' }}>The DBA Network Hub</h2>
+            <p style={{ fontFamily: 'sans-serif', fontSize: '14px', color: '#C6AC8F', maxWidth: '520px', margin: '0 auto', lineHeight: 1.7 }}>
+              A private space for DBA pastors and staff — share playbooks, find expertise, and call for help when the nets get heavy.
+            </p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px', marginBottom: '48px' }}>
+            {[
+              {
+                title: 'Playbook Library',
+                desc: 'Access real solutions from real churches in our network — sabbatical plans, counseling frameworks, leadership systems.',
+                icon: '📖'
+              },
+              {
+                title: 'Find a Pastor',
+                desc: 'Search our network by expertise. Find who already has the playbook for what you\'re facing right now.',
+                icon: '🤝'
+              },
+              {
+                title: 'Direct Connect',
+                desc: 'Message any pastor in the network directly. No group chats. No inbox spam. Signal when you need reinforcements.',
+                icon: '✉️'
+              },
+            ].map(card => (
+              <div key={card.title} style={{
+                backgroundColor: '#0A0908', border: '1px solid #5E503F', borderRadius: '4px', padding: '32px 28px'
+              }}>
+                <div style={{ fontSize: '28px', marginBottom: '16px' }}>{card.icon}</div>
+                <h3 style={{ fontFamily: 'Georgia, serif', fontSize: '18px', color: '#EAE0D5', marginBottom: '10px' }}>{card.title}</h3>
+                <p style={{ fontFamily: 'sans-serif', fontSize: '13px', color: '#C6AC8F', lineHeight: 1.7 }}>{card.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div style={{ textAlign: 'center' }}>
+            <Link href="/login" style={{
+              display: 'inline-block', backgroundColor: '#C6AC8F', color: '#22333B',
+              fontFamily: 'sans-serif', fontWeight: '700', fontSize: '14px',
+              padding: '14px 32px', borderRadius: '4px', textDecoration: 'none'
+            }}>
               Pastor Login →
             </Link>
           </div>
@@ -114,12 +144,14 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-slate-800 px-6 py-8">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-slate-600 text-sm">
-          <div>Delaware Baptist Association · 316 Red Mill Road, Newark, DE 19713</div>
-          <div className="flex gap-6">
-            <a href="tel:302-741-2488" className="hover:text-slate-400 transition-colors">302-741-2488</a>
-            <a href="mailto:info@delawarebaptist.com" className="hover:text-slate-400 transition-colors">info@delawarebaptist.com</a>
+      <footer style={{ backgroundColor: '#0A0908', padding: '32px 24px', borderTop: '1px solid #22333B' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ fontFamily: 'sans-serif', fontSize: '12px', color: '#5E503F' }}>
+            Delaware Baptist Association · 316 Red Mill Road, Newark, DE 19713
+          </div>
+          <div style={{ display: 'flex', gap: '24px' }}>
+            <a href="tel:302-741-2488" style={{ fontFamily: 'sans-serif', fontSize: '12px', color: '#5E503F', textDecoration: 'none' }}>302-741-2488</a>
+            <a href="mailto:info@delawarebaptist.com" style={{ fontFamily: 'sans-serif', fontSize: '12px', color: '#5E503F', textDecoration: 'none' }}>info@delawarebaptist.com</a>
           </div>
         </div>
       </footer>
